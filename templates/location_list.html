@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Location Record</title>
+	<link rel="stylesheet" href="{% static 'css/location_list.css' %}">
+</head>
+<body>
+  <h1>Location Record ({{patient.name}})</h1>
+  <table>
+
+	<tr>
+		<th>Location Visited</th>
+		<th>Address</th>
+		<th>District</th>
+		<th>X Coord</th>
+		<th>Y Coord</th>
+		<th>Date From</th>
+		<th>Date To</th>
+		<th>Detail</th>
+		<th>Category</th>
+	</tr>
+
+	{% for location in location_list %}
+	<tr>
+		<td>{{location.name}}</td>
+
+		{% for address in location.address.all %}
+		  <td>{{address.road}}</td>
+		  <td>{{address.district}}</td>
+        {% endfor %}
+
+        {% for gridcoordinate in location.gridcoordinate.all %}
+		  <td>{{gridcoordinate.xCoord}}</td>
+		  <td>{{gridcoordinate.yCoord}}</td>
+		{% endfor %}
+
+		{% for datebetween in location.datebetween.all %}
+		  <td>{{datebetween.dateFrom}}</td>
+		  <td>{{datebetween.dateTo}}</td>
+		{% endfor %}
+
+        {% for detail in location.detail.all %}
+		  <td>{{detail}}</td>
+		{% endfor %}
+
+		{% for category in location.category.all %}
+		  <td>{{category}}</td>
+		{% endfor %}
+
+	</tr>
+	{% endfor %}
+
+  </table>
+</body>
+</html>

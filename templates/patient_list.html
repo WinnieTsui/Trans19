@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Patient Record</title>
+	<link rel="stylesheet" href="{% static 'css/patient_list.css' %}">
+</head>
+<body>
+  <h1>Patient Record</h1>
+  <table>
+
+	<tr>
+		<th>Name</th>
+		<th>Identity Document Number</th>
+		<th>Date of Birth</th>
+		<th>Date Case Confirmed</th>
+		<th>Case Number</th>
+	</tr>
+
+	{% for patient in patient_list %}
+	<tr>
+		<td><a href="{% url 'patient-location' patient.pk %}">{{patient.name}}</a></td>
+		<td>{{patient.HKID}}</td>
+		<td>{{patient.dateOfBirth}}</td>
+		<td>{{patient.dateCaseConfirmed}}</td>
+		<td>{{patient.caseNumber}}</td>
+	</tr>
+	{% endfor %}
+
+  </table>
+</body>
+</html>
